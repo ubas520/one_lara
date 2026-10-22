@@ -1,0 +1,16 @@
+uploads/documents/*
+uploads/**/*
+!uploads/**/
+!uploads/**/.htaccess
+logs/*.log
+sms_cloud.local.php
+email.local.php
+logs/email-setup-status.json
+/bin/configure_gmail.ps1
+*.zip
+/vendor/
+/bin/composer.phar
+/bin/composer.sha256
+.env
+.env.*
+!.env.example

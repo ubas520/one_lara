@@ -1,0 +1,246 @@
+
+.auth-body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 2rem 1rem;
+    background: #FDF2F2;
+}
+
+@keyframes cardIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-8px); }
+    60% { transform: translateY(-4px); }
+}
+
+/* =========================
+   SPLIT-PANEL SHELL
+========================= */
+
+.auth-shell {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    max-width: 940px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(127, 29, 29, 0.25);
+    background: #fff;
+    animation: cardIn 0.5s ease-out;
+}
+
+/* Left: brand / welcome panel */
+
+.auth-brand-panel {
+    flex: 0 0 42%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 3rem 2.5rem;
+    color: #fff;
+
+    background:
+        linear-gradient(135deg, #7F1D1D, #B91C1C, #DC2626),
+        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="dots" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="2" fill="%23ffffff" opacity="0.08"/></pattern></defs><rect width="100" height="100" fill="url(%23dots)"/></svg>');
+    background-size: cover, auto;
+}
+
+.auth-brand-panel .auth-brand-icon {
+    font-size: 2.5rem;
+    color: #FDE68A;
+    margin-bottom: 1.1rem;
+    animation: bounce 2.4s infinite;
+}
+
+.auth-brand-panel .auth-brand-sub {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #FDE68A;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+.auth-brand-panel h1 {
+    font-size: 1.75rem;
+    line-height: 1.25;
+    margin: 0 0 0.8rem;
+}
+
+.auth-brand-panel h1 .auth-brand-gold {
+    color: #FDE68A;
+}
+
+.auth-brand-panel p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 2rem;
+}
+
+.auth-brand-back {
+    margin-top: auto;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.85rem;
+    opacity: 0.85;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    width: fit-content;
+}
+.auth-brand-back:hover { opacity: 1; text-decoration: underline; }
+
+/* Right: form panel (still called .auth-card so existing mobile.css rules keep working) */
+
+.auth-card {
+    flex: 1;
+    background: #fff;
+    padding: 3rem 2.75rem;
+}
+
+.auth-form-header { margin-bottom: 1.5rem; }
+.auth-form-header h2 {
+    margin: 0 0 0.3rem;
+    font-size: 1.7rem;
+    color: #7F1D1D;
+}
+.auth-form-header p { margin: 0; color: #777; font-size: 0.9rem; }
+
+.auth-alert {
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+.auth-alert-error   { background: #FEF2F2; color: #991B1B; border: 1px solid #FCA5A5; }
+.auth-alert-success { background: #F0FDF4; color: #166534; border: 1px solid #86EFAC; }
+.auth-alert ul { margin: 0; padding-left: 1.2rem; }
+
+.auth-form { display: flex; flex-direction: column; gap: 1rem; }
+.auth-row  { display: flex; gap: 1rem; }
+.auth-row .auth-group { flex: 1; }
+
+.auth-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: #333;
+}
+.auth-group input,
+.auth-group select,
+.auth-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 2px solid #F3D2D2;
+    background: #FEF2F2;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: 0.3s ease;
+}
+.auth-group input:focus,
+.auth-group select:focus,
+.auth-group textarea:focus {
+    outline: none;
+    border-color: #F59E0B;
+    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+    background: #fff;
+}
+
+.auth-input-wrap {
+    position: relative;
+}
+.auth-input-wrap i.auth-input-icon {
+    position: absolute;
+    left: 0.9rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #B91C1C;
+    opacity: 0.6;
+    font-size: 0.9rem;
+    pointer-events: none;
+}
+.auth-input-wrap input {
+    padding-left: 2.4rem !important;
+}
+.auth-input-wrap .auth-toggle-pw {
+    position: absolute;
+    right: 0.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    padding: 0.4rem;
+    font-size: 0.9rem;
+}
+.auth-input-wrap .auth-toggle-pw:hover {
+    color: #B91C1C;
+}
+
+.auth-btn {
+    padding: 0.9rem;
+    background: #DC2626;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(127, 29, 29, 0.25);
+}
+.auth-btn:hover {
+    background: #991B1B;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(127, 29, 29, 0.35);
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 1.2rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+.auth-footer a { color: #B91C1C; text-decoration: none; font-weight: 600; }
+.auth-footer a:hover { text-decoration: underline; }
+.address-picker select { width: 100%; padding: .75rem; border: 1px solid #efcccc; border-radius: 8px; background: #fff; font: inherit; }
+.address-status { font-size: .85rem; line-height: 1.5; color: #625653; }
+
+@media (max-width: 480px) {
+    .auth-row { flex-direction: column; gap: 1rem; }
+}
+
+@media (max-width: 760px) {
+    .auth-shell {
+        flex-direction: column;
+        max-width: 480px;
+    }
+    .auth-brand-panel {
+        flex: none;
+        text-align: center;
+        align-items: center;
+        padding: 2rem 1.75rem;
+    }
+    .auth-brand-panel p { margin-bottom: 1rem; }
+    .auth-brand-back { margin-top: 0.5rem; }
+}
+.residency-upload { min-width: 0; border: 1px solid #efcccc; border-radius: 12px; padding: 1rem; margin: .5rem 0 1rem; }
+.residency-upload legend { padding: 0 .4rem; font-weight: 700; color: #991b1b; }
+.residency-upload p { color: #625653; font-size: .8rem; line-height: 1.6; margin-bottom: 1rem; }
+.residency-upload select, .residency-upload input[type="file"] { width: 100%; max-width: 100%; padding: .7rem; border: 1px solid #efcccc; border-radius: 8px; background: #fff; font: inherit; font-size: .85rem; }

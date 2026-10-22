@@ -1,0 +1,404 @@
+/* =====================================================================
+ * OneLara - Mobile stylesheet
+ * Save as:  C:\xampp\htdocs\onelara\assets\css\mobile.css
+ *
+ * IMPORTANT: link this LAST, on the line just before </head>, on every
+ * page. It has to come after each page's own <style> block or it will
+ * be overruled and nothing will change.
+ *
+ * Nothing here affects desktop. Everything is inside a media query, so
+ * screens wider than 992px are untouched.
+ * ===================================================================== */
+
+
+/* ---------------------------------------------------------------------
+ * 0. APPLIES AT EVERY SIZE
+ * Stops a single wide table from making the whole page slide sideways.
+ * ------------------------------------------------------------------- */
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+}
+
+
+/* =====================================================================
+ * 1. TABLETS AND PHONES  (992px and below)
+ * ===================================================================== */
+
+@media (max-width: 992px) {
+
+    /* -----------------------------------------------------------------
+     * HEADER
+     *
+     * Every nav link is already built as  <a><i class="fas fa-..."></i> Home</a>
+     * so instead of shrinking the text (which still needs room to
+     * scroll), we hide the text and keep just the icon. The trick:
+     * set the link's own font-size to 0, which collapses its text node
+     * to nothing, then set the icon's font-size back up. No HTML edits
+     * needed, and every link still fits on one line -- nothing scrolls.
+     * ----------------------------------------------------------------- */
+
+    .admin-header {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        padding: 0.6rem 0.8rem;
+    }
+
+    .admin-header-brand {
+        font-size: 0;              /* hide "OneLara" text, keep the icon */
+        gap: 0;
+        flex: 0 0 auto;
+    }
+    .admin-header-brand i {
+        font-size: 1.3rem;
+    }
+
+    .admin-header-actions {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        gap: 0.35rem;
+        flex: 0 0 auto;
+    }
+
+    /* the little avatar + name chip -- keep the avatar, drop the name */
+    .user-chip {
+        padding: 0;
+        background: none;
+        border: none;
+        gap: 0;
+        font-size: 0;
+    }
+    .user-chip .avatar-circle {
+        width: 30px;
+        height: 30px;
+        font-size: 0.85rem;        /* the letter inside stays visible */
+    }
+
+    /* icon-only nav buttons: round, evenly spaced, easy to tap */
+    .admin-header-actions a {
+        font-size: 0;               /* collapses the text label */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        padding: 0;
+        border-radius: 50%;
+        flex: 0 0 auto;
+    }
+    .admin-header-actions a i {
+        font-size: 1.05rem;         /* icon stays visible and readable */
+    }
+
+    /* --- Main content --- */
+    .admin-main {
+        padding: 1rem 0.85rem;
+    }
+
+    .admin-main h1 {
+        font-size: 1.35rem;
+    }
+
+    /* --- Tables: scroll inside their own box --- */
+    /* display:block turns the table into a scrollable container without
+       needing to edit any HTML. */
+    .rtable,
+    .req-table,
+    table.table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
+
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* A faint edge so it's obvious there is more to the right */
+    .rtable, .req-table, .table-responsive {
+        background-image: linear-gradient(to left, rgba(127,29,29,0.08), transparent 24px);
+    }
+}
+
+
+/* =====================================================================
+ * 2. PHONES  (768px and below)
+ * ===================================================================== */
+
+@media (max-width: 768px) {
+
+    /* --- Cards: two per row instead of one, and noticeably smaller.
+       Stat cards are short on content (an icon, a number, a label) so
+       they don't need a full row each -- two side by side reads fine
+       and roughly halves how far you have to scroll. --- */
+    .admin-stat-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+        margin-top: 0.9rem;
+    }
+
+    .admin-stat-card {
+        padding: 0.75rem 0.85rem;
+        gap: 0.6rem;
+        border-radius: 12px;
+    }
+
+    .admin-stat-card .stat-icon-badge {
+        width: 34px;
+        height: 34px;
+    }
+    .admin-stat-card i { font-size: 1.05rem; }
+
+    .stat-number { font-size: 1.15rem; }
+    .stat-label  { font-size: 0.68rem; }
+
+    /* Feature cards carry more text (a description + buttons), so they
+       stay one per row, just tightened up. */
+    .feature-grid {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+        margin-top: 0.9rem;
+    }
+
+    .feature-card {
+        padding: 0.9rem;
+        border-radius: 12px;
+    }
+
+    .feature-card i.feature-icon {
+        font-size: 1.3rem;
+    }
+
+    .feature-card h3 {
+        font-size: 0.95rem;
+    }
+
+    .feature-card p {
+        font-size: 0.8rem;
+    }
+
+    .feature-card .feature-actions {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+
+    .feature-btn {
+        flex: 1;
+        text-align: center;
+        padding: 0.55rem 0.7rem;
+        font-size: 0.82rem;
+    }
+
+    /* --- KPI blocks used on the report pages --- */
+    .kpi-row {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0.5rem;
+    }
+
+    .kpi .num  { font-size: 1rem; }
+    .kpi .lbl  { font-size: 0.62rem; }
+
+    .report-section {
+        padding: 0.85rem !important;
+        border-radius: 12px;
+        margin-bottom: 0.9rem !important;
+    }
+    .report-section h2 {
+        font-size: 0.92rem !important;
+    }
+
+    /* --- Forms: 16px stops iPhone auto-zooming on focus --- */
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="date"],
+    input[type="time"],
+    input[type="tel"],
+    input[type="search"],
+    select,
+    textarea {
+        font-size: 16px !important;
+        width: 100%;
+        box-sizing: border-box;
+        max-width: 100%;
+    }
+
+    /* --- Touch targets: 44px is the accessibility minimum --- */
+    button,
+    .btn,
+    .auth-btn,
+    .feature-btn,
+    input[type="submit"] {
+        min-height: 44px;
+    }
+
+    /* --- Filter chips (?status=pending etc.) swipe sideways --- */
+    .filter-bar,
+    .filters,
+    .status-filters,
+    .conv-switcher {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 0.5rem;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 0.4rem;
+    }
+
+    .filter-bar a,
+    .filters a,
+    .status-filters a {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+
+    /* --- Messaging bubbles --- */
+    .bubble {
+        max-width: 85% !important;
+    }
+
+    /* --- Bootstrap modals on the six pages that use them --- */
+    .modal-dialog {
+        margin: 0.5rem !important;
+        max-width: calc(100% - 1rem) !important;
+    }
+
+    .modal-body {
+        padding: 1rem !important;
+    }
+
+    .modal-body .form-row,
+    .modal-body .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .modal-body .col,
+    .modal-body [class*="col-"] {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        margin-bottom: 0.6rem;
+    }
+
+    /* --- Auth pages --- */
+    .auth-card {
+        padding: 1.3rem 1.1rem;
+        border-radius: 14px;
+    }
+    .auth-header h2 { font-size: 1.15rem; }
+    .auth-header i  { font-size: 1.7rem; }
+
+    /* --- Turn off hover lift effects. On a touch screen these stick
+           on after a tap and look broken. --- */
+    .admin-stat-card:hover,
+    .feature-card:hover,
+    .admin-header-actions a:hover {
+        transform: none;
+    }
+}
+
+
+/* =====================================================================
+ * 3. SMALL PHONES  (480px and below)
+ * ===================================================================== */
+
+@media (max-width: 480px) {
+
+    .admin-main {
+        padding: 0.85rem 0.65rem;
+    }
+
+    .admin-main h1 {
+        font-size: 1.1rem;
+    }
+
+    .admin-stat-grid {
+        grid-template-columns: 1fr;   /* one per row once it's this tight */
+        gap: 0.5rem;
+    }
+
+    .kpi-row {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .rtable th, .rtable td,
+    .req-table th, .req-table td,
+    table.table th, table.table td {
+        padding: 0.45rem 0.55rem !important;
+        font-size: 0.78rem !important;
+    }
+
+    .badge, .pbadge {
+        font-size: 0.65rem !important;
+        padding: 0.2rem 0.5rem !important;
+    }
+
+    .section-heading {
+        font-size: 1rem;
+    }
+}
+
+
+/* =====================================================================
+ * 4. ANIMATION SAFETY
+ * Respects the phone's "reduce motion" accessibility setting.
+ * ===================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+/* =====================================================================
+ * 5. PRINT
+ * So officials can print a report or a resident list cleanly.
+ * Nice bonus point for your defense.
+ * ===================================================================== */
+
+@media print {
+    .admin-header,
+    .feature-actions,
+    .filter-bar,
+    .filters,
+    .no-print,
+    button,
+    .btn {
+        display: none !important;
+    }
+
+    body, .admin-body {
+        background: #fff !important;
+    }
+
+    .admin-main {
+        padding: 0;
+        max-width: 100%;
+    }
+
+    .report-section,
+    .rtable,
+    .req-table {
+        box-shadow: none !important;
+        page-break-inside: avoid;
+    }
+}
