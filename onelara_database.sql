@@ -487,10 +487,30 @@ CREATE TABLE `users` (
   CONSTRAINT `fk_users_role` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
--- Initial application roles and document types.
-INSERT INTO `roles` (`id`, `role_name`, `description`) VALUES (1,'resident','Barangay resident with a registered account'),(2,'official','Barangay official / staff who processes requests'),(3,'health_worker','Barangay health worker managing the health center'),(4,'sysadmin','System administrator with full access');
+-- Registration email verification tables.
+CREATE TABLE `login_email_otps` (
+  `user_id` int(11) NOT NULL,
+  `token_hash` char(64) NOT NULL,
+  `code_hash` varchar(255) NOT NULL,
+  `expires_at` bigint(20) NOT NULL DEFAULT 0,
+  `attempts` int(11) NOT NULL DEFAULT 0,
+  `last_sent` bigint(20) NOT NULL,
+  `window_start` bigint(20) NOT NULL,
+  `send_count` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `document_types` (`id`, `name`, `description`, `fee`, `is_active`) VALUES (1,'Barangay Clearance','General clearance for employment or business',50.00,1),(2,'Certificate of Indigency','Certification of indigent status',0.00,1),(3,'Certificate of Residency','Proof of residency in Barangay Lara',30.00,1),(4,'Business Permit Endorsement','Barangay endorsement for business permit',100.00,1),(5,'Barangay ID','Official barangay identification card',50.00,1);
+CREATE TABLE `registration_email_verifications` (
+  `user_id` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `verified_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Initial application roles and document types.
+INSERT INTO `roles` (`id`, `role_name`, `description`) VALUES ('1','resident','Barangay resident with a registered account'),('2','official','Barangay official / staff who processes requests'),('3','health_worker','Barangay health worker managing the health center'),('4','sysadmin','System administrator with full access');
+
+INSERT INTO `document_types` (`id`, `name`, `description`, `fee`, `is_active`) VALUES ('1','Barangay Clearance','General clearance for employment or business','50.00','1'),('2','Certificate of Indigency','Certification of indigent status','0.00','1'),('3','Certificate of Residency','Proof of residency in Barangay Lara','30.00','1'),('4','Business Permit Endorsement','Barangay endorsement for business permit','100.00','1'),('5','Barangay ID','Official barangay identification card','50.00','1');
 
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

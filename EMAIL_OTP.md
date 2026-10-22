@@ -9,7 +9,7 @@ If delivery fails or the browser closes, the registration and uploaded proof rem
 Email is sent directly through PHPMailer over authenticated, encrypted SMTP. XAMPP Sendmail, PHP `mail()`, and `sendmail_path` are no longer used. PHPMailer is installed and pinned using Composer (`composer.json` and `composer.lock`).
 
 1. Install dependencies with `composer install --no-dev --prefer-dist --optimize-autoloader`. PHP 8.1+ and OpenSSL are required. On the current Windows machine, the equivalent command is `C:\xampp\php\php.exe -d extension=zip bin\composer.phar install --no-dev --prefer-dist --optimize-autoloader`.
-2. Run `php bin/setup_registration_email.php` once for an existing database. Fresh installations must also run this command after importing the database. The migration does not mark old emails as verified or change existing account access.
+2. Run `php bin/setup_registration_email.php` once for an existing database that lacks the verification tables. Fresh imports of the current `onelara_database.sql` already contain both tables. The migration does not mark old emails as verified or change existing account access.
 3. Set these environment variables in your hosting provider's application settings. They must be visible to the PHP web process, not just your terminal:
 
 | Variable | Gmail example |
