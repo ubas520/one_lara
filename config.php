@@ -1,18 +1,23 @@
 <?php
 
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'onelara');
-define('DB_USER', 'root');
-define('DB_PASS', '');
+define('DB_HOST', getenv('DB_HOST') !== false ? getenv('DB_HOST') : 'localhost');
+define('DB_PORT', getenv('DB_PORT') !== false ? getenv('DB_PORT') : '3306');
+define('DB_NAME', getenv('DB_NAME') !== false ? getenv('DB_NAME') : 'onelara');
+define('DB_USER', getenv('DB_USER') !== false ? getenv('DB_USER') : 'root');
+define('DB_PASS', getenv('DB_PASS') !== false ? getenv('DB_PASS') : '');
 
 
-define('DEBUG_MODE', true);
+define('DEBUG_MODE', getenv('DEBUG_MODE') !== false
+    ? filter_var(getenv('DEBUG_MODE'), FILTER_VALIDATE_BOOLEAN)
+    : getenv('RAILWAY_ENVIRONMENT_ID') === false);
 define('GCASH_NUMBER', '09123456789');
 define('GCASH_ACCOUNT_NAME', 'Barangay Lara - OneLara');
 
 if (DEBUG_MODE) {
     ini_set('display_errors', 1);
     error_reporting(E_ALL);
+} else {
+    ini_set('display_errors', 0);
 }
 
 date_default_timezone_set('Asia/Manila');
@@ -20,7 +25,7 @@ date_default_timezone_set('Asia/Manila');
 
 try {
     $pdo = new PDO(
-        'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8mb4',
+        'mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_NAME . ';charset=utf8mb4',
         DB_USER,
         DB_PASS,
         [
