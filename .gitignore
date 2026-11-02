@@ -5,6 +5,7 @@ uploads/**/*
 logs/*.log
 sms_cloud.local.php
 email.local.php
+admin_account.local.sql
 logs/email-setup-status.json
 /bin/configure_gmail.ps1
 *.zip
